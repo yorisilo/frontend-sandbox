@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "name": "frontend-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "format": "./node_modules/.bin/prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint": "./node_modules/.bin/eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "fix": "npm run format & npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yorisilo/frontend-sandbox.git"
+  },
+  "author": "yorisilo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yorisilo/frontend-sandbox/issues"
+  },
+  "homepage": "https://github.com/yorisilo/frontend-sandbox#readme"
+}
