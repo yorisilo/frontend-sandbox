@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XSS検証用ページ</title>
+  </head>
+  <body>
+    <h1>XSS検証用ページ</h1>
+    <div id="result"></div>
+    <a id="link" href="#">リンクをクリック</a>
+  </body>
+</html>
+
+<script>
+  // http://localhost:3000/xss.html?message=<img%20src%20onerror=alert('xss')> へアクセスして xss を確認する
+  const url = new URL(location.href);
+  const message = url.searchParams.get("message");
+  if (message !== null) {
+    // innerHTML をそのまま使うと、脆弱性になる
+    document.querySelector("#result").innerHTML = message;
+    // 文字列をテキストとして扱うようにすると良い
+    // const textNode = document.createTextNode(message);
+    // document.querySelector("#result").appendChild(textNode);
+    // or
+    // document.querySelector("#result").textContent = message;
+  }
+  // http://localhost:3000/xss.html?url=javascript:alert('xss by javascript:') へアクセスして、リンクを押し xss を確認する
+  const urlStr = url.searchParams.get("url");
+  if (urlStr !== null) {
+    const linkUrl = new URL(urlStr, url.origin); // 相対パスへの対応のため URL オブジェクトを作成している
+    document.querySelector("#link").href = linkUrl;
+    // url の protocol チェックを行う(http:, https: のみを対象とする)
+    if (linkUrl.protocol === "http:" || linkUrl.protocol === "https:") {
+      document.querySelector("#link").href = linkUrl;
+    } else {
+      console.warn("httpまたはhttps以外のURLが指定されています。");
+    }
+  }
+</script>

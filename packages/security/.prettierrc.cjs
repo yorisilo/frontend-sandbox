@@ -3,4 +3,5 @@ module.exports = {
   arrowParens: "always",
   singleQuote: false,
   trailingComma: "none",
+  parser: "typescript"
 };
