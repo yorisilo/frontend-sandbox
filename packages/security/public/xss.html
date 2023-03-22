@@ -16,7 +16,7 @@
   const message = url.searchParams.get("message");
   if (message !== null) {
     // innerHTML をそのまま使うと、脆弱性になる
-    document.querySelector("#result").innerHTML = message;
+    // document.querySelector("#result").innerHTML = message;
     // 文字列をテキストとして扱うようにすると良い
     // const textNode = document.createTextNode(message);
     // document.querySelector("#result").appendChild(textNode);
@@ -27,7 +27,7 @@
   const urlStr = url.searchParams.get("url");
   if (urlStr !== null) {
     const linkUrl = new URL(urlStr, url.origin); // 相対パスへの対応のため URL オブジェクトを作成している
-    document.querySelector("#link").href = linkUrl;
+    // document.querySelector("#link").href = linkUrl;
     // url の protocol チェックを行う(http:, https: のみを対象とする)
     if (linkUrl.protocol === "http:" || linkUrl.protocol === "https:") {
       document.querySelector("#link").href = linkUrl;
